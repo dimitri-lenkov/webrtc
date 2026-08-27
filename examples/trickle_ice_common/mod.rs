@@ -234,7 +234,7 @@ impl PeerConnectionEventHandler for TrickleHandler {
                 } else {
                     match dc.poll().await {
                         Some(DataChannelEvent::OnOpen) => {
-                            println!("Data channel '{label}'-'{id}' open");
+                            println!("Data channel '{label}'-'{id:?}' open");
                             opened = true;
                             send_timer = Box::pin(sleep(Duration::from_secs(3)));
                         }

@@ -157,7 +157,7 @@ async fn async_main() -> anyhow::Result<()> {
         while let Some(event) = data_channel.poll().await {
             match event {
                 DataChannelEvent::OnOpen => {
-                    println!("Data channel '{label}'-'{id}' open. Random messages will now be sent to any connected DataChannels every 5 seconds");
+                    println!("Data channel '{label}'-'{id:?}' open. Random messages will now be sent to any connected DataChannels every 5 seconds");
 
                     let data_channel = data_channel.clone();
                     runtime_clone.spawn(Box::pin(async move {
@@ -177,7 +177,7 @@ async fn async_main() -> anyhow::Result<()> {
                     }));
                 }
                 DataChannelEvent::OnClose => {
-                    println!("Data channel {id} is closed");
+                    println!("Data channel {id:?} is closed");
                     break;
                 }
                 DataChannelEvent::OnMessage(msg) => {

@@ -182,11 +182,11 @@ async fn async_main(cli: Cli) -> Result<()> {
         loop {
             match dc.poll().await {
                 Some(DataChannelEvent::OnOpen) => {
-                    println!("[Offer] Data channel '{label}'-'{id}' is open!");
+                    println!("[Offer] Data channel '{label}'-'{id:?}' is open!");
                     break;
                 }
                 Some(DataChannelEvent::OnClose) | None => {
-                    println!("[Offer] Data channel '{label}'-'{id}' closed before opening.");
+                    println!("[Offer] Data channel '{label}'-'{id:?}' closed before opening.");
                     return;
                 }
                 _ => {}
@@ -204,7 +204,7 @@ async fn async_main(cli: Cli) -> Result<()> {
                             println!("[Offer] Message from DataChannel '{label}': '{text}'");
                         }
                         Some(DataChannelEvent::OnClose) | None => {
-                            println!("[Offer] Data channel '{label}'-'{id}' closed.");
+                            println!("[Offer] Data channel '{label}'-'{id:?}' closed.");
                             break;
                         }
                         _ => {}

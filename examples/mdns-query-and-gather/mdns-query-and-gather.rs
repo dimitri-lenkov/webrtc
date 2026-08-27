@@ -106,7 +106,7 @@ impl PeerConnectionEventHandler for MdnsHandler {
             loop {
                 match dc.poll().await {
                     Some(DataChannelEvent::OnOpen) => {
-                        println!("Data channel '{label}'-'{id}' open");
+                        println!("Data channel '{label}'-'{id:?}' open");
                     }
                     Some(DataChannelEvent::OnMessage(msg)) => {
                         let text = String::from_utf8(msg.data.to_vec()).unwrap_or_default();
