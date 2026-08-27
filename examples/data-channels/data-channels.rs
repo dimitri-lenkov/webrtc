@@ -73,12 +73,12 @@ impl PeerConnectionEventHandler for TestHandler {
                 }
             };
             let id = data_channel.id();
-            println!("New DataChannel {label} {id}");
+            println!("New DataChannel {label} {id:?}");
 
             while let Some(event) = data_channel.poll().await {
                 match event {
                     DataChannelEvent::OnOpen => {
-                        println!("Data channel '{label}'-'{id}' open. Random messages will now be sent to any connected DataChannels every 5 seconds");
+                        println!("Data channel '{label}'-'{id:?}' open. Random messages will now be sent to any connected DataChannels every 5 seconds");
                         let data_channel = data_channel.clone();
                         runtime.spawn(Box::pin(async move {
                             let mut result = Result::<()>::Ok(());
@@ -97,7 +97,7 @@ impl PeerConnectionEventHandler for TestHandler {
                         }));
                     }
                     DataChannelEvent::OnClose => {
-                        println!("Data channel {id} is closed");
+                        println!("Data channel {id:?} is closed");
                         break;
                     }
                     DataChannelEvent::OnMessage(msg) => {
